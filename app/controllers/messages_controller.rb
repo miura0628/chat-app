@@ -15,11 +15,10 @@ class MessagesController < ApplicationController
     end
   end
 
-  if @message.save
-    redirect_to room_messages_path(@room)
-  else
-    @messages = @room.messages.includes(:user)
-    render :index
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+    redirect_to root_path
   end
 
   private
